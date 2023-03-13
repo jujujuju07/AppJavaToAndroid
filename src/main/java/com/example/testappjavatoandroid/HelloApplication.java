@@ -51,10 +51,13 @@ public class HelloApplication extends Application {
                 imageView.setImage(new Image("http://192.168.1.17:8080/image/carre-blanc.jpg"));
                 imageView.setFitHeight(150);
                 imageView.setFitWidth(150);
-                imageView.setId("ImageView"+i+j);
+                imageView.setId("ImageView "+ i + " " + j);
                 imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
+                        String[] t = imageView.getId().split(" ");
+                        helloController.selection = Integer.parseInt(t[1]) + Integer.parseInt(t[2]);
+                        helloController.modif();
                         System.out.println("salut");
                     }
                 });
