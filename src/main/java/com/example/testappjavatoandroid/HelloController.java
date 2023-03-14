@@ -71,7 +71,7 @@ public class HelloController extends Application implements Initializable{
                     for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
                         Donner donner = new Donner();
                         donner.setText("");
-                        donner.setImage("");
+                        donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
                         donnerList.add(donner);
                     }
                 }
@@ -83,7 +83,7 @@ public class HelloController extends Application implements Initializable{
             for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
                 Donner donner = new Donner();
                 donner.setText("");
-                donner.setImage("");
+                donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
                 donnerList.add(donner);
             }
 
@@ -207,73 +207,5 @@ public class HelloController extends Application implements Initializable{
         updateButton();
 
     }
-
-    public EventHandler<? super MouseEvent> button(int i){
-        selection = i;
-        modif();
-        return null;
-    }
-
-
-    public void Button11(MouseEvent mouseEvent) {
-        selection = 0;
-        modif();
-    }
-    public void Button12(MouseEvent mouseEvent) {
-        selection = 1;
-        modif();
-
-    }
-    public void Button13(MouseEvent mouseEvent) {
-        selection = 2;
-        modif();
-
-    }
-    public void Button14(MouseEvent mouseEvent) {
-        selection = 3;
-        modif();
-
-    }
-    public void Button21(MouseEvent mouseEvent) {
-        selection = 4;
-        modif();
-
-    }
-    public void Button22(MouseEvent mouseEvent) {
-        selection = 5;
-        modif();
-
-    }
-    public void Button23(MouseEvent mouseEvent) {
-        selection = 6;
-        modif();
-
-    }
-    public void Button24(MouseEvent mouseEvent) {
-        selection = 7;
-        modif();
-
-    }
-    public void Button31(MouseEvent mouseEvent) {
-        selection = 8;
-        modif();
-
-    }
-    public void Button32(MouseEvent mouseEvent) {
-        selection = 9;
-        modif();
-
-    }
-    public void Button33(MouseEvent mouseEvent) {
-        selection = 10;
-        modif();
-
-    }
-    public void Button34(MouseEvent mouseEvent) {
-        selection = 11;
-        modif();
-
-    }
-
 
 }
