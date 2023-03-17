@@ -32,7 +32,7 @@ public class ModifeButton {
         donner.setImage(TextImage.getText());
         donner.setText(TextText.getText());
         donnerE.setExecute(TextExecute.getText());
-        //helloController.stage.close();
+        helloController.stage.close();
 
     }
 }
