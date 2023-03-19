@@ -3,6 +3,15 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.25.0'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+jar{
+    manifest {
+        attributes(
+                'Main-Class' : 'org.example.testapptoandroid.ServeurTCP'
+        )
+    }
 }
 
 group 'com.example'
@@ -35,7 +44,7 @@ javafx {
 
 dependencies {
 
-    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

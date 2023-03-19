@@ -2,14 +2,12 @@ package com.example.testappjavatoandroid;
 
 import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
-import com.example.testappjavatoandroid.methode.model.Response;
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     private Path pathValeur = Paths.get("valeur.txt");
@@ -41,6 +40,7 @@ public class HelloApplication extends Application {
         helloController.longeur.setText(donnerApp.getLongeur());
         helloController.largeur.setText(donnerApp.getLargeur());
         VBox vBox = (VBox) root.lookup("#liste_button");
+        boolean nouvauxlistCase = false;
         for (int i = 0; i <Integer.parseInt(donnerApp.getLargeur()); i++) {
             HBox hBox = new HBox();
             for (int j = 0; j <Integer.parseInt(donnerApp.getLongeur()); j++) {
@@ -56,7 +56,8 @@ public class HelloApplication extends Application {
                     @Override
                     public void handle(MouseEvent event) {
                         String[] t = imageView.getId().split(" ");
-                        helloController.selection = Integer.parseInt(t[1]) + Integer.parseInt(t[2]);
+                        helloController.selectionlistlistcase = Integer.parseInt(t[1]);
+                        helloController.selectionlistcase = Integer.parseInt(t[2]);
                         helloController.modif();
                         System.out.println("salut");
                     }
@@ -65,13 +66,17 @@ public class HelloApplication extends Application {
 
 
                 label.setId("LabelView"+i+j);
-                helloController.caseList.add(new Case(imageView,label));
+                if (!nouvauxlistCase){
+                    helloController.listlistcase.add(new ArrayList<Case>());
+                }
+                helloController.listlistcase.get(i).add(new Case(imageView,label));
 
                 stackPane.getChildren().add(imageView);
                 stackPane.getChildren().add(label);
                 hBox.getChildren().add(stackPane);
 
             }
+            nouvauxlistCase = true;
             vBox.getChildren().add(hBox);
         }
         helloController.lance();

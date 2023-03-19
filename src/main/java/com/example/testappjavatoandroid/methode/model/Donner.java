@@ -1,7 +1,6 @@
 
 package com.example.testappjavatoandroid.methode.model;
 
-
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")

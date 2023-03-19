@@ -1,5 +1,6 @@
 package com.example.testappjavatoandroid;
 
+import com.example.testappjavatoandroid.methode.model.Donner;
 import com.example.testappjavatoandroid.methode.model.Response;
 import com.google.gson.Gson;
 import javafx.application.Platform;
@@ -60,12 +61,18 @@ public class ServeurTCP {
 
     public void reception() throws IOException {
         try{
+            Response response = new Response();
+            ArrayList<Donner> donner = new ArrayList<>();
+            for (int i = 0; i < fxmlCont.donnerListList.size(); i++) {
+                for (int j = 0; j < fxmlCont.donnerListList.get(i).size(); j++) {
+                    donner.add(fxmlCont.donnerListList.get(i).get(j));
+                }
+            }
 
             while (socketDuClient.isConnected()){
                 System.out.println("attente...");
                 Gson gson = new Gson();
-                Response response = new Response();
-                response.setDonner(fxmlCont.donnerList);
+                response.setDonner(donner);
                 response.setLine(fxmlCont.donnerApp.getLargeur());
                 fluxSortie.println(gson.toJson(response));
                 int NbLus = fluxEntree.read(bufferEntree);

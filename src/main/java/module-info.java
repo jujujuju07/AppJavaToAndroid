@@ -10,4 +10,5 @@ module com.example.testappjavatoandroid {
     opens com.example.testappjavatoandroid.methode to com.google.gson;
     exports com.example.testappjavatoandroid;
     exports com.example.testappjavatoandroid.methode;
+    exports com.example.testappjavatoandroid.methode.model;
 }

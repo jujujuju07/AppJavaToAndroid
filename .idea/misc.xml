@@ -10,7 +10,7 @@
   <component name="jsonEditor">
     <option name="stateMap">
       <map>
-        <entry key="TestAppJavaToAndroid" value="{&#10;&#9;&quot;longeur&quot;:&quot;5&quot;,&#10;&#9;&quot;largeur&quot;:&quot;3&quot;&#10;}" />
+        <entry key="TestAppJavaToAndroid" value="{&#10;&#9;&quot;arrayListDonner&quot;:[&#10;&#9;&#9;[&#10;&#9;&#9;&#9;{&#10;&#9;&#9;&#9;&#9;&quot;image&quot;:&quot;0&quot;,&#10;&#9;&#9;&#9;&#9;&quot;test&quot;:&quot;0&quot;&#10;&#9;&#9;&#9;},&#10;&#9;&#9;&#9;{&#10;&#9;&#9;&#9;&#9;&quot;image&quot;:&quot;0&quot;,&#10;&#9;&#9;&#9;&#9;&quot;test&quot;:&quot;0&quot;&#10;&#9;&#9;&#9;}&#10;&#9;&#9;],&#10;&#9;&#9;[&#10;&#9;&#9;&#9;{&#10;&#9;&#9;&#9;&#9;&quot;image&quot;:&quot;0&quot;,&#10;&#9;&#9;&#9;&#9;&quot;test&quot;:&quot;0&quot;&#10;&#9;&#9;&#9;},&#10;&#9;&#9;&#9;{&#10;&#9;&#9;&#9;&#9;&quot;image&quot;:&quot;0&quot;,&#10;&#9;&#9;&#9;&#9;&quot;test&quot;:&quot;0&quot;&#10;&#9;&#9;&#9;}&#10;&#9;&#9;]&#10;&#9;]&#10;}" />
       </map>
     </option>
   </component>

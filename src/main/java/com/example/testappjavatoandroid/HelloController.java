@@ -3,18 +3,16 @@ package com.example.testappjavatoandroid;
 import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
 import com.example.testappjavatoandroid.methode.model.Donner;
-import com.example.testappjavatoandroid.methode.model.Response;
+import com.example.testappjavatoandroid.methode.model.ArrayListListDonner;
 import com.example.testappjavatoandroid.methode.modelExecute.ResponseExecute;
 import com.google.gson.Gson;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,9 +37,11 @@ public class HelloController extends Application implements Initializable{
     public Path pathDonner = Paths.get("donner.txt");
     public Path pathExecute = Paths.get("execute.txt");
     private Path pathValeur = Paths.get("valeur.txt");
-    public int selection;
+    public int selectionlistcase;
+    public int selectionlistlistcase;
+    public ArrayList<ArrayList<Donner>> donnerListList = new ArrayList<>();
     public List<Donner> donnerList = new ArrayList<>();
-    public List<Case> caseList = new ArrayList<>();
+    public ArrayList<ArrayList<Case>> listlistcase = new ArrayList<>();
     public List<com.example.testappjavatoandroid.methode.modelExecute.Donner> execute = new ArrayList<>();
     public ModifeButton modifeButton;
     public DonnerApp donnerApp;
@@ -58,8 +58,47 @@ public class HelloController extends Application implements Initializable{
 
     public void lance(){
         serveurTCP.lancer();
-        selection = -1;
+        selectionlistlistcase = -1;
+        selectionlistcase = -1;
+
         if (Files.exists(pathDonner)){
+            try {
+                Gson gson = new Gson();
+                br = Files.newBufferedReader(pathDonner);
+                String line = br.readLine();
+                if (!Objects.equals(line, "")){
+                    ArrayListListDonner arrayListListDonner = gson.fromJson(line, ArrayListListDonner.class);
+                    donnerListList = arrayListListDonner.getArrayListDonner();
+                }else {
+                    for (int i = 0; i < Integer.parseInt(donnerApp.getLargeur()); i++) {
+                        donnerListList.add(new ArrayList<Donner>());
+                        for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
+                            Donner donner = new Donner();
+                            donner.setText("");
+                            donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
+                            donnerListList.get(i).add(donner);
+                        }
+                    }
+                }
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }else {
+            for (int i = 0; i < Integer.parseInt(donnerApp.getLargeur()); i++) {
+                donnerListList.add(new ArrayList<Donner>());
+                for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
+                    Donner donner = new Donner();
+                    donner.setText("");
+                    donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
+                    donnerListList.get(i).add(donner);
+                }
+            }
+
+        }
+
+        /*if (Files.exists(pathDonner)){
             try {
                 Gson gson = new Gson();
                 br = Files.newBufferedReader(pathDonner);
@@ -86,8 +125,7 @@ public class HelloController extends Application implements Initializable{
                 donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
                 donnerList.add(donner);
             }
-
-        }
+        }*/
         if (Files.exists(pathExecute)){
             try {
                 Gson gson = new Gson();
@@ -116,21 +154,29 @@ public class HelloController extends Application implements Initializable{
 
         }
 
+        for (int i = 0; i < listlistcase.size(); i++) {
+            for (int j = 0; j < listlistcase.get(i).size(); j++) {
+                if (!Objects.equals(donnerListList.get(i).get(j).getImage(), "")){
+                    listlistcase.get(i).get(j).imageView.setImage(new Image(donnerListList.get(i).get(j).getImage()));
+                }
+                listlistcase.get(i).get(j).label.setText(donnerListList.get(i).get(j).getText());
 
-        for (int i = 0; i < caseList.size(); i++) {
-            if (!Objects.equals(donnerList.get(i).getImage(), "")){
-                caseList.get(i).imageView.setImage(new Image(donnerList.get(i).getImage()));
             }
-            caseList.get(i).label.setText(donnerList.get(i).getText());
         }
+
+/*        for (int i = 0; i < listlistcase.size(); i++) {
+            for (int j = 0; j < listlistcase.get(i).size(); j++) {
+                listlistcase.get(i).get(j).imageView.setImage(new Image(donnerListList.get(i).get(j).getImage()));
+                listlistcase.get(i).get(j).label.setText(donnerListList.get(i).get(j).getText());
+            }
+        }*/
 
     }
 
     public void fermeture(){
         Gson gson = new Gson();
-        Response response = new Response();
-        response.setDonner(donnerList);
-        response.setLine(donnerApp.getLargeur());
+        ArrayListListDonner donner = new ArrayListListDonner();
+        donner.setArrayListDonner(donnerListList);
         ResponseExecute responseExecute = new ResponseExecute();
         responseExecute.setDonner(execute);
         if (largeur.getText() != ""){
@@ -141,7 +187,7 @@ public class HelloController extends Application implements Initializable{
         }
         try {
             bw = Files.newBufferedWriter(pathDonner);
-            bw.write(gson.toJson(response));
+            bw.write(gson.toJson(donner));
             bw.close();
             bw = Files.newBufferedWriter(pathExecute);
             bw.write(gson.toJson(responseExecute));
@@ -182,14 +228,15 @@ public class HelloController extends Application implements Initializable{
     }
 
     public void updateButton(){
-            if (!donnerList.get(selection).getImage().equals("")){
-                caseList.get(selection).imageView.setImage(new Image(donnerList.get(selection).getImage()));
-            }else {
-                caseList.get(selection).imageView.setImage(new Image("http://192.168.1.17:8080/image/carre-blanc.jpg"));
-            }
-            caseList.get(selection).label.setText(donnerList.get(selection).getText());
+        if (!donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage().equals("")){
+            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image(donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage()));
+        }else {
+            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("http://192.168.1.17:8080/image/carre-blanc.jpg"));
+        }
+        listlistcase.get(selectionlistlistcase).get(selectionlistcase).label.setText(donnerListList.get(selectionlistlistcase).get(selectionlistcase).getText());
 
-            selection = -1;
+        selectionlistlistcase = -1;
+        selectionlistcase = -1;
     }
 
     @Override
@@ -199,7 +246,7 @@ public class HelloController extends Application implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("modifeButton.fxml"));
         Scene scene = new Scene(loader.load());
         modifeButton = loader.getController();
-        modifeButton.donner(donnerList.get(selection), execute.get(selection) ,this);
+        modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase) ,this);
 
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
