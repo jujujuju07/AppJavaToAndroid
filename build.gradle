@@ -3,15 +3,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.25.0'
-    id "com.github.johnrengelman.shadow" version "7.1.2"
-}
-
-jar{
-    manifest {
-        attributes(
-                'Main-Class' : 'org.example.testapptoandroid.ServeurTCP'
-        )
-    }
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group 'com.example'
@@ -63,4 +55,16 @@ jlink {
 
 jlinkZip {
     group = 'distribution'
+}
+
+tasks {
+    shadowJar {
+        manifest {
+            attributes(
+                    'Main-Class':'org.exemple.Main',
+                    'Class-Path': ['gson-2.10.jar','javafx-base-17.0.2.jar','javafx-base-17.0.2-win.jar','javafx-controls-17.0.2.jar','javafx-controls-17.0.2-win.jar','javafx-fxml-17.0.2-win.jar','javafx-graphics-17.0.2.jar','javafx-graphics-17.0.2-win.jar']
+            )
+        }
+        configurations = [project.configurations.compileClasspath]
+    }
 }
