@@ -98,34 +98,6 @@ public class HelloController extends Application implements Initializable{
 
         }
 
-        /*if (Files.exists(pathDonner)){
-            try {
-                Gson gson = new Gson();
-                br = Files.newBufferedReader(pathDonner);
-                String line = br.readLine();
-                if (!Objects.equals(line, "")){
-                    Response response = gson.fromJson(line, Response.class);
-                    donnerList = response.getDonner();
-                }else {
-                    for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
-                        Donner donner = new Donner();
-                        donner.setText("");
-                        donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
-                        donnerList.add(donner);
-                    }
-                }
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
-                Donner donner = new Donner();
-                donner.setText("");
-                donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
-                donnerList.add(donner);
-            }
-        }*/
         if (Files.exists(pathExecute)){
             try {
                 Gson gson = new Gson();
@@ -164,12 +136,6 @@ public class HelloController extends Application implements Initializable{
             }
         }
 
-/*        for (int i = 0; i < listlistcase.size(); i++) {
-            for (int j = 0; j < listlistcase.get(i).size(); j++) {
-                listlistcase.get(i).get(j).imageView.setImage(new Image(donnerListList.get(i).get(j).getImage()));
-                listlistcase.get(i).get(j).label.setText(donnerListList.get(i).get(j).getText());
-            }
-        }*/
 
     }
 
