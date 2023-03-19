@@ -17,8 +17,6 @@ public class ServeurTCP {
     final int port=1222;
     char [ ] bufferEntree = new char [65535];
     String messageRecu = null;
-    BufferedReader fluxEntree;
-    PrintStream fluxSortie;
     Socket socketDuClient;
     HelloController fxmlCont;
     ServerSocket monServerDeSocket = null;
@@ -42,12 +40,18 @@ public class ServeurTCP {
                     while (true) {
                         socketDuClient = monServerDeSocket.accept();
                         System.out.println("Connexion avec : "+socketDuClient.getInetAddress());
-
-                        fluxEntree = new BufferedReader(new InputStreamReader(socketDuClient.getInputStream()));
-                        fluxSortie = new PrintStream(socketDuClient.getOutputStream());
                         socketA.add(socketDuClient);
-
-                        reception();
+                        Thread thread = new Thread(){
+                            @Override
+                            public void run() {
+                                try {
+                                    reception(socketDuClient);
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        };
+                        thread.start();
                     }
 
                 } catch (IOException e) {
@@ -59,7 +63,9 @@ public class ServeurTCP {
         }).start();
     }
 
-    public void reception() throws IOException {
+    public void reception(Socket socket) throws IOException {
+        BufferedReader fluxEntree = new BufferedReader(new InputStreamReader(socketDuClient.getInputStream()));
+        PrintStream fluxSortie = new PrintStream(socketDuClient.getOutputStream());
         try{
             Response response = new Response();
             ArrayList<Donner> donner = new ArrayList<>();
@@ -69,7 +75,7 @@ public class ServeurTCP {
                 }
             }
 
-            while (socketDuClient.isConnected()){
+            while (socket.isConnected()){
                 System.out.println("attente...");
                 Gson gson = new Gson();
                 response.setDonner(donner);
@@ -80,17 +86,17 @@ public class ServeurTCP {
                     messageRecu = new String(bufferEntree, 0,NbLus);
                     fxmlCont.execute(messageRecu);
                 }else {
-                    deconexion();
+                    deconexion(socket,fluxEntree,fluxSortie);
                 }
 
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
-            deconexion();
+            deconexion(socket,fluxEntree,fluxSortie);
         }
     }
 
-    public void envoier(String message){
+    public void envoier(String message,PrintStream fluxSortie){
         if (message.length() != 0 )
         {
             System.out.println("\t\t Message reçu : " + message );
@@ -101,12 +107,16 @@ public class ServeurTCP {
 
     }
 
-    public void deconexion() throws IOException {
+    public void deconexion(Socket socket,BufferedReader fluxEntree,PrintStream fluxSortie) throws IOException {
         fluxSortie.close();
         fluxEntree.close();
-        socketDuClient.close();
-        socketA.clear();
+        socket.close();
+    }
 
+    public void deconexionAll() throws IOException {
+        for (int i = 0; i < socketA.size(); i++) {
+            socketA.get(i).close();
+        }
     }
 
 
