@@ -178,13 +178,16 @@ public class HelloController extends Application implements Initializable{
     }
 
     public void execute(String messageRecu){
-        try {
-            Runtime r = Runtime.getRuntime();
-            Process p = null;
-            String s = execute.get(Integer.parseInt(messageRecu)).getExecute();
-            p = r.exec(s);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if(!Objects.equals(messageRecu, "")){
+
+            try {
+                Runtime r = Runtime.getRuntime();
+                Process p = null;
+                String s = execute.get(Integer.parseInt(messageRecu)).getExecute();
+                p = r.exec(s);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
