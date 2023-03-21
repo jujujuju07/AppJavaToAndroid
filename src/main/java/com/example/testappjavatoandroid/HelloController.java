@@ -183,8 +183,7 @@ public class HelloController extends Application implements Initializable{
             try {
                 Runtime r = Runtime.getRuntime();
                 Process p = null;
-                String s = execute.get(Integer.parseInt(messageRecu)).getExecute();
-                p = r.exec(s);
+                p = r.exec(messageRecu);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -220,7 +219,7 @@ public class HelloController extends Application implements Initializable{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("modifeButton.fxml"));
         Scene scene = new Scene(loader.load());
         modifeButton = loader.getController();
-        modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase) ,this);
+        modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase+(selectionlistlistcase*10)) ,this);
 
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
