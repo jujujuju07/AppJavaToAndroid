@@ -9,10 +9,15 @@ import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -220,11 +225,61 @@ public class HelloController extends Application implements Initializable{
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setTitle("titre");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("modifeButton.fxml"));
-        Scene scene = new Scene(loader.load());
-        modifeButton = loader.getController();
-        modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase+(selectionlistlistcase*10)) ,this);
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("modifeButton.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("modifie_Button.fxml"));
 
+        Parent root = loader.load();
+
+        ArrayList<List_visuel_Button> classArrayList = new ArrayList<>();
+
+        ScrollPane scrollPane = (ScrollPane) root.lookup("#scrollPaneG1");
+        Button button11 = (Button) scrollPane.getContent().lookup("#button11");
+        Button button12 = (Button) scrollPane.getContent().lookup("#button12");
+        Button button = (Button) scrollPane.getContent().lookup("#button13");
+
+        VBox vBoxM = (VBox) root.lookup("#vBoxM");
+
+        ArrayList<HBox> arrayLists = new ArrayList<>();
+
+        button11.setOnAction(event -> {
+            List_visuel_Button testButton = new List_visuel_Button();
+            HBox hBox = testButton.testButton(arrayLists);
+            classArrayList.add(testButton);
+            if (arrayLists.size() != 0){
+                String[] strings = arrayLists.get(arrayLists.size()-1).getId().split(" ");
+                hBox.setId("Button11 " +(Integer.parseInt(strings[1])+1));
+            }else {
+                hBox.setId("Button11 1");
+            }
+            arrayLists.add(hBox);
+            vBoxM.getChildren().add(hBox);
+
+        });
+        button12.setOnAction(event -> {
+            List_visuel_Button testButton = new List_visuel_Button();
+            HBox hBox = testButton.button12(arrayLists);
+            if (arrayLists.size() != 0){
+                String[] strings = arrayLists.get(arrayLists.size()-1).getId().split(" ");
+                hBox.setId("Button12 " +(Integer.parseInt(strings[1])+1));
+            }else {
+                hBox.setId("Button12 1");
+            }
+            arrayLists.add(hBox);
+            vBoxM.getChildren().add(hBox);
+        });
+        button.setOnAction(event -> {
+            for (int i = 0; i < arrayLists.size(); i++) {
+                System.out.println(arrayLists.get(i).getId());
+            }
+            System.out.println();
+        });
+
+
+
+        //modifeButton = loader.getController();
+        //modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase+(selectionlistlistcase*10)) ,this);
+
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();

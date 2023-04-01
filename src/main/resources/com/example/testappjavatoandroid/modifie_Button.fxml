@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testappjavatoandroid.Modifier_Button">
+   <right>
+      <VBox fx:id="vBoxD" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Text" />
+            <TextField />
+            <Label text="Image" />
+            <TextField />
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <VBox fx:id="vBoxM" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <ScrollPane fx:id="scrollPaneG1" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="vboxG">
+               <children>
+                  <Button fx:id="button1" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button1" prefHeight="30.0" prefWidth="150.0" text="Button1">
+                     <graphic>
+                        <Label text="Label" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="button11" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button11" />
+                  <Button fx:id="button12" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button12" />
+                  <Button fx:id="button13" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button13" />
+                  <Button fx:id="button14" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button14" />
+                  <Button fx:id="button15" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button15" />
+                  <Button fx:id="button16" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button16" />
+                  <Button fx:id="button17" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button17" />
+                  <Button fx:id="button18" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button18" />
+                  <Button fx:id="button19" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button19" />
+                  <Button fx:id="button110" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button110" prefHeight="30.0" prefWidth="150.0" text="Button110">
+                     <graphic>
+                        <Label text="Label" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="button111" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button111" />
+                  <Button fx:id="button121" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button121" />
+                  <Button fx:id="button131" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button131" />
+                  <Button fx:id="button141" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button141" />
+                  <Button fx:id="button151" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button151" />
+                  <Button fx:id="button161" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button161" />
+                  <Button fx:id="button171" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button171" />
+                  <Button fx:id="button181" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button181" />
+                  <Button fx:id="button191" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button191" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </left>
+</BorderPane>
