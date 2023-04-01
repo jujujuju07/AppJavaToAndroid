@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -56,10 +58,11 @@ public class HelloController extends Application implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void lance(){
+    public void lance() throws UnknownHostException {
         serveurTCP.lancer();
         selectionlistlistcase = -1;
         selectionlistcase = -1;
+        String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
 
         if (Files.exists(pathDonner)){
             try {
@@ -75,7 +78,7 @@ public class HelloController extends Application implements Initializable{
                         for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
                             Donner donner = new Donner();
                             donner.setText("");
-                            donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
+                            donner.setImage("http://"+ ip[1] +":8080/image/carre-blanc.jpg");
                             donnerListList.get(i).add(donner);
                         }
                     }
@@ -91,7 +94,7 @@ public class HelloController extends Application implements Initializable{
                 for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
                     Donner donner = new Donner();
                     donner.setText("");
-                    donner.setImage("http://192.168.1.17:8080/image/carre-blanc.jpg");
+                    donner.setImage("http://"+ ip[1] +":8080/image/carre-blanc.jpg");
                     donnerListList.get(i).add(donner);
                 }
             }
@@ -200,11 +203,12 @@ public class HelloController extends Application implements Initializable{
 
     }
 
-    public void updateButton(){
+    public void updateButton() throws UnknownHostException {
         if (!donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage().equals("")){
             listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image(donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage()));
         }else {
-            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("http://192.168.1.17:8080/image/carre-blanc.jpg"));
+            String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
+            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("http://"+ ip[1] +":8080/image/carre-blanc.jpg"));
         }
         listlistcase.get(selectionlistlistcase).get(selectionlistcase).label.setText(donnerListList.get(selectionlistlistcase).get(selectionlistcase).getText());
 

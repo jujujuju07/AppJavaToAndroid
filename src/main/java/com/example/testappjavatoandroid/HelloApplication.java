@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,8 +48,10 @@ public class HelloApplication extends Application {
                 StackPane stackPane = new StackPane();
                 ImageView imageView = new ImageView();
                 Label label = new Label();
+                String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
+                System.out.println(ip[1]);
 
-                imageView.setImage(new Image("http://192.168.1.17:8080/image/carre-blanc.jpg"));
+                imageView.setImage(new Image("http:/" + ip[1] + ":8080/image/carre-blanc.jpg"));
                 imageView.setFitHeight(150);
                 imageView.setFitWidth(150);
                 imageView.setId("ImageView "+ i + " " + j);
