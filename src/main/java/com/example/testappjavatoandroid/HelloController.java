@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -63,7 +64,8 @@ public class HelloController extends Application implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void lance() throws UnknownHostException {
+    public void lance() throws IOException, InterruptedException {
+        serveurTCP.serveurMulticast();
         serveurTCP.lancer();
         selectionlistlistcase = -1;
         selectionlistcase = -1;
@@ -237,33 +239,22 @@ public class HelloController extends Application implements Initializable{
         Button button12 = (Button) scrollPane.getContent().lookup("#button12");
         Button button = (Button) scrollPane.getContent().lookup("#button13");
 
-        VBox vBoxM = (VBox) root.lookup("#vBoxM");
 
+        VBox vBoxM = (VBox) root.lookup("#vBoxM");
         ArrayList<HBox> arrayLists = new ArrayList<>();
 
         button11.setOnAction(event -> {
             List_visuel_Button testButton = new List_visuel_Button();
             HBox hBox = testButton.testButton(arrayLists);
             classArrayList.add(testButton);
-            if (arrayLists.size() != 0){
-                String[] strings = arrayLists.get(arrayLists.size()-1).getId().split(" ");
-                hBox.setId("Button11 " +(Integer.parseInt(strings[1])+1));
-            }else {
-                hBox.setId("Button11 1");
-            }
+            hBox.setId("Button11");
             arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
-
         });
         button12.setOnAction(event -> {
             List_visuel_Button testButton = new List_visuel_Button();
             HBox hBox = testButton.button12(arrayLists);
-            if (arrayLists.size() != 0){
-                String[] strings = arrayLists.get(arrayLists.size()-1).getId().split(" ");
-                hBox.setId("Button12 " +(Integer.parseInt(strings[1])+1));
-            }else {
-                hBox.setId("Button12 1");
-            }
+            hBox.setId("Button12");
             arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });

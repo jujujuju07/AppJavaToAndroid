@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testappjavatoandroid.Modifier_Button">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testappjavatoandroid.Modifier_Button">
    <right>
       <VBox fx:id="vBoxD" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,13 +27,13 @@
          <content>
             <VBox fx:id="vboxG">
                <children>
-                  <Button fx:id="button1" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button1" prefHeight="30.0" prefWidth="150.0" text="Button1">
+                  <Button fx:id="button1" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button1" prefHeight="30.0" prefWidth="150.0" text="volume">
                      <graphic>
-                        <Label text="Label" />
+                        <ImageView fx:id="buttonVolume" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="button11" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button11" />
-                  <Button fx:id="button12" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button12" />
+                  <Button fx:id="button11" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume+" />
+                  <Button fx:id="button12" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume-" />
                   <Button fx:id="button13" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button13" />
                   <Button fx:id="button14" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button14" />
                   <Button fx:id="button15" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button15" />
