@@ -1,18 +1,15 @@
 
-package com.example.testappjavatoandroid;
+package com.example.testappjavatoandroid.button;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class ListButton {
+public class ButtonList {
 
     @SerializedName("buttonDonner")
     private String mButtonDonner;
     @SerializedName("buttonType")
     private String mButtonType;
-    @SerializedName("listButton")
-    private List<ListButton> mListButton;
 
     public String getButtonDonner() {
         return mButtonDonner;
@@ -28,14 +25,6 @@ public class ListButton {
 
     public void setButtonType(String buttonType) {
         mButtonType = buttonType;
-    }
-
-    public List<ListButton> getListButton() {
-        return mListButton;
-    }
-
-    public void setListButton(List<ListButton> listButton) {
-        mListButton = listButton;
     }
 
 }
