@@ -11,4 +11,6 @@ module com.example.testappjavatoandroid {
     exports com.example.testappjavatoandroid;
     exports com.example.testappjavatoandroid.methode;
     exports com.example.testappjavatoandroid.methode.model;
+    exports com.example.testappjavatoandroid.button;
+    opens com.example.testappjavatoandroid.button to javafx.fxml;
 }
