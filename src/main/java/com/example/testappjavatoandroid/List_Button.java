@@ -43,16 +43,17 @@ public class List_Button {
         return hBox;
     }
     public HBox buttonVolumePlus(ArrayList<HBox> hBoxes){
-        return buttonbasique(hBoxes,"volume +");
+        return buttonbasique(hBoxes,"volume +","volumePlus");
 
     }
 
     public String decodeTestButton(HBox hBox){
+        System.out.println(hBox.getId());
         TextField textField = (TextField) hBox.lookup("#TextField");
         return textField.getText();
     }
 
-    public HBox button12(ArrayList<HBox> hBoxes){
-        return buttonbasique(hBoxes,"volume -");
+    public HBox buttonVolumeMoins(ArrayList<HBox> hBoxes){
+        return buttonbasique(hBoxes,"volume -","VolumeMoins");
     }
 }
