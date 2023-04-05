@@ -49,7 +49,6 @@ public class HelloApplication extends Application {
                 ImageView imageView = new ImageView();
                 Label label = new Label();
                 String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
-                System.out.println(ip[1]);
 
                 imageView.setImage(new Image("http:/" + ip[1] + ":8080/image/carre-blanc.jpg"));
                 imageView.setFitHeight(150);
