@@ -28,13 +28,13 @@
          <content>
             <VBox fx:id="vboxG">
                <children>
-                  <Button fx:id="button1" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button1" prefHeight="30.0" prefWidth="150.0" text="volume">
+                  <Button fx:id="volume" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#volume" prefHeight="30.0" prefWidth="150.0" text="volume">
                      <graphic>
                         <ImageView fx:id="buttonVolume" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
-                  <Button fx:id="button11" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume+" />
-                  <Button fx:id="button12" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume-" />
+                  <Button fx:id="volumePlus" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume+" />
+                  <Button fx:id="volumeMoins" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume-" />
                   <Button fx:id="button13" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button13" />
                   <Button fx:id="button14" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button14" />
                   <Button fx:id="button15" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button15" />
