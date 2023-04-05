@@ -143,20 +143,33 @@ public class ServeurTCP {
 
     }
 
-    public void serveurMulticast() throws IOException, InterruptedException {
-        MulticastSocket multicastSocket = new MulticastSocket();
-        InetAddress multicastGroup = InetAddress.getByName("224.0.0.1");
-        multicastSocket.joinGroup(multicastGroup);
+    public void serveurMulticast() {
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                MulticastSocket multicastSocket = null;
+                try {
+                    multicastSocket = new MulticastSocket();
 
-        while (true) {
-            String message = InetAddress.getLocalHost().getHostAddress();
-            byte[] buffer = message.getBytes();
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length, multicastGroup, 4446);
+                InetAddress multicastGroup = InetAddress.getByName("224.0.0.1");
+                multicastSocket.joinGroup(multicastGroup);
 
-            multicastSocket.send(packet);
+                while (true) {
+                    String message = InetAddress.getLocalHost().getHostAddress();
+                    byte[] buffer = message.getBytes();
+                    DatagramPacket packet = new DatagramPacket(buffer, buffer.length, multicastGroup, 4446);
 
-            Thread.sleep(1000);
-        }
+                    multicastSocket.send(packet);
+
+                    Thread.sleep(1000);
+                }
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        thread.start();
+
 
     }
 
