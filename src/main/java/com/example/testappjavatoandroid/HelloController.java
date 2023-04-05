@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -232,7 +231,7 @@ public class HelloController extends Application implements Initializable{
 
         Parent root = loader.load();
 
-        ArrayList<List_visuel_Button> classArrayList = new ArrayList<>();
+        ArrayList<List_Button> classArrayList = new ArrayList<>();
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scrollPaneG1");
         Button button11 = (Button) scrollPane.getContent().lookup("#button11");
@@ -244,15 +243,15 @@ public class HelloController extends Application implements Initializable{
         ArrayList<HBox> arrayLists = new ArrayList<>();
 
         button11.setOnAction(event -> {
-            List_visuel_Button testButton = new List_visuel_Button();
-            HBox hBox = testButton.testButton(arrayLists);
+            List_Button testButton = new List_Button();
+            HBox hBox = testButton.buttonVolumePlus(arrayLists);
             classArrayList.add(testButton);
             hBox.setId("Button11");
             arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });
         button12.setOnAction(event -> {
-            List_visuel_Button testButton = new List_visuel_Button();
+            List_Button testButton = new List_Button();
             HBox hBox = testButton.button12(arrayLists);
             hBox.setId("Button12");
             arrayLists.add(hBox);
@@ -264,6 +263,8 @@ public class HelloController extends Application implements Initializable{
             }
             System.out.println();
         });
+        Modifier_Button modifier_button = loader.getController();
+        modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase));
 
 
 
@@ -273,9 +274,10 @@ public class HelloController extends Application implements Initializable{
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        stage.showAndWait();stage.setOnCloseRequest(event -> modifier_button.save());
         updateButton();
 
     }
+
 
 }

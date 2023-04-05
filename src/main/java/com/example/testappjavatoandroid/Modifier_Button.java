@@ -1,7 +1,13 @@
 package com.example.testappjavatoandroid;
 
+import com.example.testappjavatoandroid.methode.model.Donner;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.time.LocalTime;
+import java.util.Objects;
 
 public class Modifier_Button {
     public Button button1;
@@ -26,6 +32,11 @@ public class Modifier_Button {
     public Button button181;
     public Button button191;
     public boolean aBoolean2 = true;
+    public TextField textFieldText;
+    public TextField textFieldImage;
+    public Button buttonSave;
+    public Label labelInfo;
+    private Donner donner;
 
 
     public void button1(ActionEvent actionEvent) {
@@ -81,5 +92,27 @@ public class Modifier_Button {
         }
     }
 
+    public void donner(Donner donner){
+        this.donner = donner;
+        mettreDonner();
+    }
 
+    private void mettreDonner(){
+        textFieldText.setText(donner.getText());
+        textFieldImage.setText(donner.getImage());
+
+    }
+
+    public void buttonSave(ActionEvent actionEvent) {
+        save();
+    }
+
+    public void save(){
+        donner.setText(textFieldText.getText());
+        donner.setImage(textFieldImage.getText());
+        if (Objects.equals(donner.getText(), textFieldText.getText()) || Objects.equals(donner.getImage(), textFieldImage.getText())){
+            LocalTime localTime = LocalTime.now();
+            labelInfo.setText("save " + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond());
+        }
+    }
 }
