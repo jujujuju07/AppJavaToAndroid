@@ -10,9 +10,9 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class Modifier_Button {
-    public Button button1;
-    public Button button11;
-    public Button button12;
+    public Button volume;
+    public Button volumePlus;
+    public Button volumeMoins;
     public Button button13;
     public Button button14;
     public Button button15;
@@ -39,10 +39,10 @@ public class Modifier_Button {
     private Donner donner;
 
 
-    public void button1(ActionEvent actionEvent) {
+    public void volume(ActionEvent actionEvent) {
         if (aBoolean1){
-            button11.setPrefHeight(0);
-            button12.setPrefHeight(0);
+            volumePlus.setPrefHeight(0);
+            volumeMoins.setPrefHeight(0);
             button13.setPrefHeight(0);
             button14.setPrefHeight(0);
             button15.setPrefHeight(0);
@@ -52,8 +52,8 @@ public class Modifier_Button {
             button19.setPrefHeight(0);
             aBoolean1 = false;
         }else {
-            button11.setPrefHeight(30);
-            button12.setPrefHeight(30);
+            volumePlus.setPrefHeight(30);
+            volumeMoins.setPrefHeight(30);
             button13.setPrefHeight(30);
             button14.setPrefHeight(30);
             button15.setPrefHeight(30);
@@ -100,7 +100,6 @@ public class Modifier_Button {
     private void mettreDonner(){
         textFieldText.setText(donner.getText());
         textFieldImage.setText(donner.getImage());
-
     }
 
     public void buttonSave(ActionEvent actionEvent) {
