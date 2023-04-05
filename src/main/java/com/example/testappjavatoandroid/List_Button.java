@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import java.util.ArrayList;
 
 public class List_Button {
-    private HBox buttonbasique(ArrayList<HBox> hBoxes,String label){
+    private HBox buttonbasique(ArrayList<HBox> hBoxes,String label,String identification){
         Button buttonSupprimmer = new Button();
         Label labeltext = new Label(" " + label + " ");
         TextField textField = new TextField();
@@ -36,6 +36,7 @@ public class List_Button {
         hBox.getChildren().add(labeltext);
         hBox.getChildren().add(textField);
         hBox.getChildren().add(buttonSupprimmer);
+        hBox.setId(identification);
         buttonSupprimmer.setOnAction(event -> {
             hBox.getChildren().clear();
             hBoxes.remove(hBox);
