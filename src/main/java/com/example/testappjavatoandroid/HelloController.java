@@ -234,30 +234,29 @@ public class HelloController extends Application implements Initializable{
         ArrayList<List_Button> classArrayList = new ArrayList<>();
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scrollPaneG1");
-        Button button11 = (Button) scrollPane.getContent().lookup("#button11");
-        Button button12 = (Button) scrollPane.getContent().lookup("#button12");
-        Button button = (Button) scrollPane.getContent().lookup("#button13");
+        Button volumePlus = (Button) scrollPane.getContent().lookup("#volumePlus");
+        Button volumeMoins = (Button) scrollPane.getContent().lookup("#volumeMoins");
+        Button button13 = (Button) scrollPane.getContent().lookup("#button13");
 
 
         VBox vBoxM = (VBox) root.lookup("#vBoxM");
         ArrayList<HBox> arrayLists = new ArrayList<>();
 
-        button11.setOnAction(event -> {
-            List_Button testButton = new List_Button();
-            HBox hBox = testButton.buttonVolumePlus(arrayLists);
-            classArrayList.add(testButton);
-            hBox.setId("Button11");
+        volumePlus.setOnAction(event -> {
+            List_Button listButton = new List_Button();
+            HBox hBox = listButton.buttonVolumePlus(arrayLists);
+            classArrayList.add(listButton);
             arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });
-        button12.setOnAction(event -> {
-            List_Button testButton = new List_Button();
-            HBox hBox = testButton.button12(arrayLists);
-            hBox.setId("Button12");
+        volumeMoins.setOnAction(event -> {
+            List_Button listButton = new List_Button();
+            HBox hBox = listButton.buttonVolumeMoins(arrayLists);
+            classArrayList.add(listButton);
             arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });
-        button.setOnAction(event -> {
+        button13.setOnAction(event -> {
             for (int i = 0; i < arrayLists.size(); i++) {
                 System.out.println(arrayLists.get(i).getId());
             }
