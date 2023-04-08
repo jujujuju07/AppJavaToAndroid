@@ -151,7 +151,7 @@ public class ServeurTCP {
                 try {
                     multicastSocket = new MulticastSocket();
 
-                InetAddress multicastGroup = InetAddress.getByName("224.0.0.1");
+                InetAddress multicastGroup = InetAddress.getByName("224.0.0.107");
                 multicastSocket.joinGroup(multicastGroup);
 
                 while (true) {
