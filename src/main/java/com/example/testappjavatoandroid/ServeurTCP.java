@@ -9,8 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.util.ArrayList;
 
 public class ServeurTCP {
@@ -141,6 +140,36 @@ public class ServeurTCP {
             // on utilise runLater.
             Platform.runLater(command);
         }
+
+    }
+
+    public void serveurMulticast() {
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                MulticastSocket multicastSocket = null;
+                try {
+                    multicastSocket = new MulticastSocket();
+
+                InetAddress multicastGroup = InetAddress.getByName("224.0.0.107");
+                multicastSocket.joinGroup(multicastGroup);
+
+                while (true) {
+                    String message = InetAddress.getLocalHost().getHostAddress();
+                    byte[] buffer = message.getBytes();
+                    DatagramPacket packet = new DatagramPacket(buffer, buffer.length, multicastGroup, 4446);
+
+                    multicastSocket.send(packet);
+
+                    Thread.sleep(1000);
+                }
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+        thread.start();
+
 
     }
 
