@@ -59,6 +59,7 @@ public class HelloController extends Application implements Initializable{
     }
 
     public void lance() throws UnknownHostException {
+        serveurTCP.serveurMulticast();
         serveurTCP.lancer();
         selectionlistlistcase = -1;
         selectionlistcase = -1;
