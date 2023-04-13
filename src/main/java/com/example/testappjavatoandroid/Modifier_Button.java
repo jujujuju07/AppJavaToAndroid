@@ -1,12 +1,17 @@
 package com.example.testappjavatoandroid;
 
+import com.example.testappjavatoandroid.button.ButtonList;
+import com.example.testappjavatoandroid.button.ListButton;
 import com.example.testappjavatoandroid.methode.model.Donner;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 public class Modifier_Button {
@@ -36,7 +41,9 @@ public class Modifier_Button {
     public TextField textFieldImage;
     public Button buttonSave;
     public Label labelInfo;
+    public VBox vBoxM;
     private Donner donner;
+    private List<ButtonList> buttonLists;
 
 
     public void volume(ActionEvent actionEvent) {
@@ -92,14 +99,30 @@ public class Modifier_Button {
         }
     }
 
-    public void donner(Donner donner){
+    public void donner(Donner donner, List<ButtonList> buttonLists){
         this.donner = donner;
+        this.buttonLists = buttonLists;
         mettreDonner();
     }
 
     private void mettreDonner(){
         textFieldText.setText(donner.getText());
         textFieldImage.setText(donner.getImage());
+
+        for (int i = 0; i < buttonLists.size(); i++) {
+            List_Button listButton = new List_Button();
+
+            switch (buttonLists.get(i).getButtonType()){
+                case "volumePlus":
+                    vBoxM.getChildren().add(listButton.buttonVolumePlus(buttonLists.get(i).getButtonDonner()));
+                    break;
+                case "VolumeMoins":
+                    vBoxM.getChildren().add(listButton.buttonVolumeMoins(buttonLists.get(i).getButtonDonner()));
+                    break;
+                default:
+            }
+
+        }
     }
 
     public void buttonSave(ActionEvent actionEvent) {
@@ -113,5 +136,22 @@ public class Modifier_Button {
             LocalTime localTime = LocalTime.now();
             labelInfo.setText("save " + localTime.getHour() + ":" + localTime.getMinute() + ":" + localTime.getSecond());
         }
+        buttonLists.clear();
+        System.out.println(vBoxM.getChildren().size());
+        for (int i = 0; i < vBoxM.getChildren().size(); i++) {
+            System.out.println(vBoxM.getChildren().get(i));
+            HBox hBox = (HBox) vBoxM.getChildren().get(i);
+            System.out.println(hBox.getId());
+            TextField textField = (TextField) hBox.getChildren().get(1);
+            System.out.println(textField.getText());
+
+            ButtonList buttonList = new ButtonList();
+            buttonList.setButtonType(hBox.getId());
+            buttonList.setButtonDonner(textField.getText());
+
+            buttonLists.add(buttonList);
+
+        }
+
     }
 }

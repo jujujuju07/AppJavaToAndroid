@@ -8,10 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.util.ArrayList;
-
 public class List_Button {
-    private HBox buttonbasique(ArrayList<HBox> hBoxes,String label,String identification){
+    private HBox buttonbasique(String label, String identification, String valuetextField){
         Button buttonSupprimmer = new Button();
         Label labeltext = new Label(" " + label + " ");
         TextField textField = new TextField();
@@ -32,6 +30,7 @@ public class List_Button {
         textField.setStyle("-fx-border-color: Black");
         textField.setPrefHeight(30);
         textField.setId("TextField");
+        textField.setText(valuetextField);
         hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().add(labeltext);
         hBox.getChildren().add(textField);
@@ -39,12 +38,11 @@ public class List_Button {
         hBox.setId(identification);
         buttonSupprimmer.setOnAction(event -> {
             hBox.getChildren().clear();
-            hBoxes.remove(hBox);
         });
         return hBox;
     }
-    public HBox buttonVolumePlus(ArrayList<HBox> hBoxes){
-        return buttonbasique(hBoxes,"volume +","volumePlus");
+    public HBox buttonVolumePlus(String valuetextField){
+        return buttonbasique("volume +","volumePlus",valuetextField);
 
     }
 
@@ -54,7 +52,7 @@ public class List_Button {
         return textField.getText();
     }
 
-    public HBox buttonVolumeMoins(ArrayList<HBox> hBoxes){
-        return buttonbasique(hBoxes,"volume -","VolumeMoins");
+    public HBox buttonVolumeMoins(String valuetextField){
+        return buttonbasique("volume -","VolumeMoins",valuetextField);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.testappjavatoandroid;
 
+import com.example.testappjavatoandroid.button.ButtonList;
 import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
 import com.example.testappjavatoandroid.methode.model.Donner;
@@ -46,11 +47,11 @@ public class HelloController extends Application implements Initializable{
     private Path pathValeur = Paths.get("valeur.txt");
     public int selectionlistcase;
     public int selectionlistlistcase;
+    public int selectionemplacement;
     public ArrayList<ArrayList<Donner>> donnerListList = new ArrayList<>();
-    public List<Donner> donnerList = new ArrayList<>();
     public ArrayList<ArrayList<Case>> listlistcase = new ArrayList<>();
     public List<com.example.testappjavatoandroid.methode.modelExecute.Donner> execute = new ArrayList<>();
-    public ModifeButton modifeButton;
+    public List<List<ButtonList>> execute_ = new ArrayList<>();
     public DonnerApp donnerApp;
 
     public Label EtatServeur;
@@ -79,15 +80,7 @@ public class HelloController extends Application implements Initializable{
                     ArrayListListDonner arrayListListDonner = gson.fromJson(line, ArrayListListDonner.class);
                     donnerListList = arrayListListDonner.getArrayListDonner();
                 }else {
-                    for (int i = 0; i < Integer.parseInt(donnerApp.getLargeur()); i++) {
-                        donnerListList.add(new ArrayList<Donner>());
-                        for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
-                            Donner donner = new Donner();
-                            donner.setText("");
-                            donner.setImage("http://"+ ip[1] +":8080/image/carre-blanc.jpg");
-                            donnerListList.get(i).add(donner);
-                        }
-                    }
+                    creationButton(ip);
                 }
                 br.close();
             } catch (IOException e) {
@@ -95,15 +88,7 @@ public class HelloController extends Application implements Initializable{
             }
 
         }else {
-            for (int i = 0; i < Integer.parseInt(donnerApp.getLargeur()); i++) {
-                donnerListList.add(new ArrayList<Donner>());
-                for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
-                    Donner donner = new Donner();
-                    donner.setText("");
-                    donner.setImage("http://"+ ip[1] +":8080/image/carre-blanc.jpg");
-                    donnerListList.get(i).add(donner);
-                }
-            }
+            creationButton(ip);
 
         }
 
@@ -116,24 +101,19 @@ public class HelloController extends Application implements Initializable{
                     ResponseExecute responseExecute = gson.fromJson(line, ResponseExecute.class);
                     execute = responseExecute.getDonner();
                 }else {
-                    for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
-                        com.example.testappjavatoandroid.methode.modelExecute.Donner donner = new com.example.testappjavatoandroid.methode.modelExecute.Donner();
-                        donner.setExecute("");
-                        execute.add(donner);
-                    }
+                    creationExecute();
+                    //creation_Execute();
                 }
                 br.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }else {
-            for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
-                com.example.testappjavatoandroid.methode.modelExecute.Donner donner = new com.example.testappjavatoandroid.methode.modelExecute.Donner();
-                donner.setExecute("");
-                execute.add(donner);
-            }
+            creationExecute();
+            //creation_Execute();
 
         }
+        creation_Execute();
 
         for (int i = 0; i < listlistcase.size(); i++) {
             for (int j = 0; j < listlistcase.get(i).size(); j++) {
@@ -146,6 +126,33 @@ public class HelloController extends Application implements Initializable{
         }
 
 
+    }
+
+    private void creationExecute() {
+        for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
+            com.example.testappjavatoandroid.methode.modelExecute.Donner donner = new com.example.testappjavatoandroid.methode.modelExecute.Donner();
+            donner.setExecute("");
+            execute.add(donner);
+        }
+    }
+
+    private void creation_Execute(){
+        for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
+            List<ButtonList> execute = new ArrayList<>();
+            execute_.add(execute);
+        }
+    }
+
+    private void creationButton(String[] ip) {
+        for (int i = 0; i < Integer.parseInt(donnerApp.getLargeur()); i++) {
+            donnerListList.add(new ArrayList<Donner>());
+            for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
+                Donner donner = new Donner();
+                donner.setText("");
+                donner.setImage("http://"+ ip[1] +":8080/image/carre-blanc.jpg");
+                donnerListList.get(i).add(donner);
+            }
+        }
     }
 
     public void fermeture(){
@@ -244,26 +251,20 @@ public class HelloController extends Application implements Initializable{
 
         volumePlus.setOnAction(event -> {
             List_Button listButton = new List_Button();
-            HBox hBox = listButton.buttonVolumePlus(arrayLists);
+            HBox hBox = listButton.buttonVolumePlus("");
             classArrayList.add(listButton);
-            arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });
         volumeMoins.setOnAction(event -> {
             List_Button listButton = new List_Button();
-            HBox hBox = listButton.buttonVolumeMoins(arrayLists);
+            HBox hBox = listButton.buttonVolumeMoins("");
             classArrayList.add(listButton);
-            arrayLists.add(hBox);
             vBoxM.getChildren().add(hBox);
         });
-        button13.setOnAction(event -> {
-            for (int i = 0; i < arrayLists.size(); i++) {
-                System.out.println(arrayLists.get(i).getId());
-            }
-            System.out.println();
-        });
         Modifier_Button modifier_button = loader.getController();
-        modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase));
+        System.out.println(execute_.size());
+        modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase),execute_.get(selectionemplacement));
+        System.out.println(selectionlistlistcase + " " + selectionlistcase + " " + selectionemplacement);
 
 
 
