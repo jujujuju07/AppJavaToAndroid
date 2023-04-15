@@ -262,9 +262,8 @@ public class HelloController extends Application implements Initializable{
             vBoxM.getChildren().add(hBox);
         });
         Modifier_Button modifier_button = loader.getController();
-        System.out.println(execute_.size());
         modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase),execute_.get(selectionemplacement));
-        System.out.println(selectionlistlistcase + " " + selectionlistcase + " " + selectionemplacement);
+        //System.out.println(selectionlistlistcase + " " + selectionlistcase + " " + selectionemplacement);
 
 
 

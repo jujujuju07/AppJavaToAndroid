@@ -139,11 +139,8 @@ public class Modifier_Button {
         buttonLists.clear();
         System.out.println(vBoxM.getChildren().size());
         for (int i = 0; i < vBoxM.getChildren().size(); i++) {
-            System.out.println(vBoxM.getChildren().get(i));
             HBox hBox = (HBox) vBoxM.getChildren().get(i);
-            System.out.println(hBox.getId());
             TextField textField = (TextField) hBox.getChildren().get(1);
-            System.out.println(textField.getText());
 
             ButtonList buttonList = new ButtonList();
             buttonList.setButtonType(hBox.getId());
