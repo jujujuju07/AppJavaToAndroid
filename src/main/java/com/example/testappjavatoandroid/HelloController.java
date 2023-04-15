@@ -1,6 +1,7 @@
 package com.example.testappjavatoandroid;
 
 import com.example.testappjavatoandroid.button.ButtonList;
+import com.example.testappjavatoandroid.button.ListButton;
 import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
 import com.example.testappjavatoandroid.methode.model.Donner;
@@ -43,6 +44,8 @@ public class HelloController extends Application implements Initializable{
     public BufferedWriter bw ;
     public BufferedReader br ;
     public Path pathDonner = Paths.get("donner.txt");
+    public Path pathExecute_ = Paths.get("execute_.txt");
+
     public Path pathExecute = Paths.get("execute.txt");
     private Path pathValeur = Paths.get("valeur.txt");
     public int selectionlistcase;
@@ -89,7 +92,6 @@ public class HelloController extends Application implements Initializable{
 
         }else {
             creationButton(ip);
-
         }
 
         if (Files.exists(pathExecute)){
@@ -102,7 +104,6 @@ public class HelloController extends Application implements Initializable{
                     execute = responseExecute.getDonner();
                 }else {
                     creationExecute();
-                    //creation_Execute();
                 }
                 br.close();
             } catch (IOException e) {
@@ -110,10 +111,26 @@ public class HelloController extends Application implements Initializable{
             }
         }else {
             creationExecute();
-            //creation_Execute();
-
         }
-        creation_Execute();
+
+        if (Files.exists(pathExecute_)){
+            try {
+                Gson gson = new Gson();
+                br = Files.newBufferedReader(pathExecute_);
+                String line = br.readLine();
+                if (!Objects.equals(line,"")){
+                    ListButton listButton = gson.fromJson(line, ListButton.class);
+                    execute_ = listButton.getButtonButton();
+                }else {
+                    creation_Execute();
+                }
+                br.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            creation_Execute();
+        }
 
         for (int i = 0; i < listlistcase.size(); i++) {
             for (int j = 0; j < listlistcase.get(i).size(); j++) {
@@ -121,11 +138,8 @@ public class HelloController extends Application implements Initializable{
                     listlistcase.get(i).get(j).imageView.setImage(new Image(donnerListList.get(i).get(j).getImage()));
                 }
                 listlistcase.get(i).get(j).label.setText(donnerListList.get(i).get(j).getText());
-
             }
         }
-
-
     }
 
     private void creationExecute() {
@@ -161,6 +175,8 @@ public class HelloController extends Application implements Initializable{
         donner.setArrayListDonner(donnerListList);
         ResponseExecute responseExecute = new ResponseExecute();
         responseExecute.setDonner(execute);
+        ListButton listButton = new ListButton();
+        listButton.setButtonButton(execute_);
         if (largeur.getText() != ""){
             donnerApp.setLargeur(largeur.getText());
         }
@@ -176,6 +192,9 @@ public class HelloController extends Application implements Initializable{
             bw.close();
             bw = Files.newBufferedWriter(pathValeur);
             bw.write(gson.toJson(donnerApp));
+            bw.close();
+            bw = Files.newBufferedWriter(pathExecute_);
+            bw.write(gson.toJson(listButton));
             bw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
