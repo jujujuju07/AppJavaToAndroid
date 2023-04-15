@@ -114,10 +114,10 @@ public class Modifier_Button {
 
             switch (buttonLists.get(i).getButtonType()){
                 case "volumePlus":
-                    vBoxM.getChildren().add(listButton.buttonVolumePlus(buttonLists.get(i).getButtonDonner()));
+                    vBoxM.getChildren().add(listButton.buttonVolumePlus(vBoxM,buttonLists.get(i).getButtonDonner()));
                     break;
                 case "VolumeMoins":
-                    vBoxM.getChildren().add(listButton.buttonVolumeMoins(buttonLists.get(i).getButtonDonner()));
+                    vBoxM.getChildren().add(listButton.buttonVolumeMoins(vBoxM,buttonLists.get(i).getButtonDonner()));
                     break;
                 default:
             }

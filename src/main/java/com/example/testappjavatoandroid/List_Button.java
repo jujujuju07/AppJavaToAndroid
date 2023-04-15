@@ -7,9 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class List_Button {
-    private HBox buttonbasique(String label, String identification, String valuetextField){
+    private HBox buttonbasique(VBox vBox, String label, String identification, String valuetextField){
         Button buttonSupprimmer = new Button();
         Label labeltext = new Label(" " + label + " ");
         TextField textField = new TextField();
@@ -38,11 +39,12 @@ public class List_Button {
         hBox.setId(identification);
         buttonSupprimmer.setOnAction(event -> {
             hBox.getChildren().clear();
+            vBox.getChildren().remove(hBox);
         });
         return hBox;
     }
-    public HBox buttonVolumePlus(String valuetextField){
-        return buttonbasique("volume +","volumePlus",valuetextField);
+    public HBox buttonVolumePlus(VBox vBox,String valuetextField){
+        return buttonbasique(vBox,"volume +","volumePlus",valuetextField);
 
     }
 
@@ -52,7 +54,7 @@ public class List_Button {
         return textField.getText();
     }
 
-    public HBox buttonVolumeMoins(String valuetextField){
-        return buttonbasique("volume -","VolumeMoins",valuetextField);
+    public HBox buttonVolumeMoins(VBox vBox,String valuetextField){
+        return buttonbasique(vBox,"volume -","VolumeMoins",valuetextField);
     }
 }

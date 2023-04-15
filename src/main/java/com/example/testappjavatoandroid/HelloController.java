@@ -251,13 +251,13 @@ public class HelloController extends Application implements Initializable{
 
         volumePlus.setOnAction(event -> {
             List_Button listButton = new List_Button();
-            HBox hBox = listButton.buttonVolumePlus("");
+            HBox hBox = listButton.buttonVolumePlus(vBoxM,"");
             classArrayList.add(listButton);
             vBoxM.getChildren().add(hBox);
         });
         volumeMoins.setOnAction(event -> {
             List_Button listButton = new List_Button();
-            HBox hBox = listButton.buttonVolumeMoins("");
+            HBox hBox = listButton.buttonVolumeMoins(vBoxM,"");
             classArrayList.add(listButton);
             vBoxM.getChildren().add(hBox);
         });
