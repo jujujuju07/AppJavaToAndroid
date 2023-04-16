@@ -19,8 +19,8 @@ public class List_Button {
         HBox hBox = new HBox();
         ImageView imageView = new ImageView("https://cdn-icons-png.flaticon.com/512/561/561125.png");
         VBox vBoxmouve = new VBox();
-        Button buttonUP = new Button("sa");
-        Button buttonDOWN = new Button("va");
+        Button buttonUP = new Button();
+        Button buttonDOWN = new Button();
         ImageView imageViewUP = new ImageView("image/fleche.png");
         ImageView imageViewDOWN = new ImageView("image/fleche.png");
 
