@@ -17,7 +17,7 @@ public class List_Button {
         Label labeltext = new Label(" " + label + " ");
         TextField textField = new TextField();
         HBox hBox = new HBox();
-        ImageView imageView = new ImageView("https://cdn-icons-png.flaticon.com/512/561/561125.png");
+        ImageView imageView = new ImageView("image/poubelle.png");
         VBox vBoxmouve = new VBox();
         Button buttonUP = new Button();
         Button buttonDOWN = new Button();
