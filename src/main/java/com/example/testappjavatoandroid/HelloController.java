@@ -80,8 +80,13 @@ public class HelloController extends Application implements Initializable{
                 br = Files.newBufferedReader(pathDonner);
                 String line = br.readLine();
                 if (!Objects.equals(line, "")){
-                    ArrayListListDonner arrayListListDonner = gson.fromJson(line, ArrayListListDonner.class);
-                    donnerListList = arrayListListDonner.getArrayListDonner();
+                    try {
+                        ArrayListListDonner arrayListListDonner = gson.fromJson(line, ArrayListListDonner.class);
+                        donnerListList = arrayListListDonner.getArrayListDonner();
+                    }catch (Exception e){
+                        creationButton(ip);
+                        System.out.println(e.getMessage());
+                    }
                 }else {
                     creationButton(ip);
                 }
@@ -119,8 +124,13 @@ public class HelloController extends Application implements Initializable{
                 br = Files.newBufferedReader(pathExecute_);
                 String line = br.readLine();
                 if (!Objects.equals(line,"")){
-                    ListButton listButton = gson.fromJson(line, ListButton.class);
-                    execute_ = listButton.getButtonButton();
+                    try {
+                        ListButton listButton = gson.fromJson(line, ListButton.class);
+                        execute_ = listButton.getButtonButton();
+                    }catch (Exception e){
+                        creation_Execute();
+                        System.out.println(e.getMessage());
+                    }
                 }else {
                     creation_Execute();
                 }
