@@ -84,6 +84,7 @@ public class ServeurTCP {
                 if (NbLus != -1){
                     messageRecu = new String(bufferEntree, 0,NbLus);
                     fxmlCont.execute(fxmlCont.execute.get(Integer.parseInt(messageRecu)).getExecute());
+                    fxmlCont.execute(Integer.parseInt(messageRecu));
                 }else {
                     deconexion(socket,fluxEntree,fluxSortie);
                 }

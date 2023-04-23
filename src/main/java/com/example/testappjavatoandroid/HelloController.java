@@ -2,6 +2,8 @@ package com.example.testappjavatoandroid;
 
 import com.example.testappjavatoandroid.button.ButtonList;
 import com.example.testappjavatoandroid.button.ListButton;
+import com.example.testappjavatoandroid.execute.Execute;
+import com.example.testappjavatoandroid.execute.Volume;
 import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
 import com.example.testappjavatoandroid.methode.model.Donner;
@@ -236,6 +238,35 @@ public class HelloController extends Application implements Initializable{
 
     }
 
+    public void execute(int nombre){
+        Volume volume;
+        Execute executeLance;
+
+        for (int i = 0; i < execute_.get(nombre).size(); i++) {
+            ButtonList buttonList = execute_.get(nombre).get(i);
+            switch (buttonList.getButtonType()){
+                case "volumePlus":
+                    volume = new Volume();
+                    volume.volume_UP(buttonList.getButtonDonner());
+                    break;
+                case "VolumeMoins":
+                    volume = new Volume();
+                    volume.volume_DOWN(buttonList.getButtonDonner());
+                    break;
+                case "lancerSon":
+                    executeLance = new Execute();
+                    executeLance.lancerSon(buttonList.getButtonDonner());
+                    break;
+                case "lancerAPP":
+                    executeLance = new Execute();
+                    executeLance.lancerAPP(buttonList.getButtonDonner());
+                    break;
+
+
+            }
+        }
+    }
+
     public void modif(){
         try {
             start(new Stage());
@@ -272,7 +303,9 @@ public class HelloController extends Application implements Initializable{
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scrollPaneG1");
         Button volumePlus = (Button) scrollPane.getContent().lookup("#volumePlus");
         Button volumeMoins = (Button) scrollPane.getContent().lookup("#volumeMoins");
-        Button button13 = (Button) scrollPane.getContent().lookup("#button13");
+        Button lancerAPP = (Button) scrollPane.getContent().lookup("#lancerAPP");
+        Button lancerSon = (Button) scrollPane.getContent().lookup("#lancerSon");
+
 
 
         VBox vBoxM = (VBox) root.lookup("#vBoxM");
@@ -290,6 +323,19 @@ public class HelloController extends Application implements Initializable{
             classArrayList.add(listButton);
             vBoxM.getChildren().add(hBox);
         });
+        lancerAPP.setOnAction(event -> {
+            List_Button listButton = new List_Button();
+            HBox hBox = listButton.buttonLancerAPP(vBoxM,"");
+            classArrayList.add(listButton);
+            vBoxM.getChildren().add(hBox);
+        });
+        lancerSon.setOnAction(event -> {
+            List_Button listButton = new List_Button();
+            HBox hBox = listButton.buttonLancerSon(vBoxM,"");
+            classArrayList.add(listButton);
+            vBoxM.getChildren().add(hBox);
+        });
+
         Modifier_Button modifier_button = loader.getController();
         modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase),execute_.get(selectionemplacement));
         //System.out.println(selectionlistlistcase + " " + selectionlistcase + " " + selectionemplacement);

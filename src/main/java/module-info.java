@@ -13,4 +13,5 @@ module com.example.testappjavatoandroid {
     exports com.example.testappjavatoandroid.methode;
     exports com.example.testappjavatoandroid.methode.model;
     exports com.example.testappjavatoandroid.button;
+    exports com.example.testappjavatoandroid.execute;
 }

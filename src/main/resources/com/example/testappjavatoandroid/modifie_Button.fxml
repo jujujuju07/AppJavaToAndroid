@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testappjavatoandroid.Modifier_Button">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1005.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testappjavatoandroid.Modifier_Button">
    <right>
       <VBox fx:id="vBoxD" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -35,27 +35,13 @@
                   </Button>
                   <Button fx:id="volumePlus" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume+" />
                   <Button fx:id="volumeMoins" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume-" />
-                  <Button fx:id="button13" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button13" />
-                  <Button fx:id="button14" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button14" />
-                  <Button fx:id="button15" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button15" />
-                  <Button fx:id="button16" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button16" />
-                  <Button fx:id="button17" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button17" />
-                  <Button fx:id="button18" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button18" />
-                  <Button fx:id="button19" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button19" />
-                  <Button fx:id="button110" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#button110" prefHeight="30.0" prefWidth="150.0" text="Button110">
+                  <Button fx:id="execute" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#execute" prefHeight="30.0" prefWidth="150.0" text="execute">
                      <graphic>
                         <Label text="Label" />
                      </graphic>
                   </Button>
-                  <Button fx:id="button111" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button111" />
-                  <Button fx:id="button121" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button121" />
-                  <Button fx:id="button131" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button131" />
-                  <Button fx:id="button141" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button141" />
-                  <Button fx:id="button151" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button151" />
-                  <Button fx:id="button161" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button161" />
-                  <Button fx:id="button171" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button171" />
-                  <Button fx:id="button181" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button181" />
-                  <Button fx:id="button191" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Button191" />
+                  <Button fx:id="lancerAPP" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="lancer application" />
+                  <Button fx:id="lancerSon" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="lancer son" />
                </children>
             </VBox>
          </content>

@@ -35,7 +35,6 @@ javafx {
 }
 
 dependencies {
-
     implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
@@ -59,12 +58,16 @@ jlinkZip {
 
 tasks {
     shadowJar {
+
+        mergeServiceFiles()
         manifest {
             attributes(
                     'Main-Class':'org.exemple.Main',
-                    'Class-Path': ['gson-2.10.jar','javafx-base-17.0.2.jar','javafx-base-17.0.2-win.jar','javafx-controls-17.0.2.jar','javafx-controls-17.0.2-win.jar','javafx-fxml-17.0.2-win.jar','javafx-graphics-17.0.2.jar','javafx-graphics-17.0.2-win.jar']
+                    'Class-Path': ['gson-2.10.jar']
             )
         }
         configurations = [project.configurations.compileClasspath]
     }
 }
+
+

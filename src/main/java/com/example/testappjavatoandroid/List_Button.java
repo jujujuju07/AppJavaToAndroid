@@ -5,11 +5,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class List_Button {
     private HBox buttonbasique(VBox vBox, String label, String identification, String valuetextField){
@@ -81,18 +79,20 @@ public class List_Button {
 
         return hBox;
     }
+
     public HBox buttonVolumePlus(VBox vBox,String valuetextField){
         return buttonbasique(vBox,"volume +","volumePlus",valuetextField);
-
-    }
-
-    public String decodeTestButton(HBox hBox){
-        System.out.println(hBox.getId());
-        TextField textField = (TextField) hBox.lookup("#TextField");
-        return textField.getText();
     }
 
     public HBox buttonVolumeMoins(VBox vBox,String valuetextField){
         return buttonbasique(vBox,"volume -","VolumeMoins",valuetextField);
+    }
+
+    public HBox buttonLancerAPP(VBox vBox,String valuetextField){
+        return buttonbasique(vBox,"lancer application","lancerAPP",valuetextField);
+    }
+
+    public HBox buttonLancerSon(VBox vBox, String valuetextField){
+        return buttonbasique(vBox,"lancer Son","lancerSon",valuetextField);
     }
 }
