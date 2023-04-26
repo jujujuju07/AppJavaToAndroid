@@ -1,7 +1,10 @@
 package com.example.testappjavatoandroid.execute;
 
+import javax.sound.sampled.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+
 
 
 public class Execute {
@@ -21,9 +24,14 @@ public class Execute {
 
     }
 
-    public void lancerSon(String value){
+    public void lancerSon(String value) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         System.out.println("lancer son " + value);
-
+        File file = new File(value);
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.setFramePosition(0);
+        clip.start();
 
     }
 

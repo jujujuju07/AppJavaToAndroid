@@ -25,6 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -255,7 +257,11 @@ public class HelloController extends Application implements Initializable{
                     break;
                 case "lancerSon":
                     executeLance = new Execute();
-                    executeLance.lancerSon(buttonList.getButtonDonner());
+                    try {
+                        executeLance.lancerSon(buttonList.getButtonDonner());
+                    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 case "lancerAPP":
                     executeLance = new Execute();
