@@ -3,17 +3,22 @@ package com.example.testappjavatoandroid;
 import com.example.testappjavatoandroid.button.ButtonList;
 import com.example.testappjavatoandroid.methode.model.Donner;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class Modifier_Button {
+public class Modifier_Button implements Initializable {
     public Button volume;
     public Button volumePlus;
     public Button volumeMoins;
@@ -27,18 +32,29 @@ public class Modifier_Button {
     public Button execute;
     public Button lancerAPP;
     public Button lancerSon;
+    public ImageView buttonVolume;
+    public ImageView buttonExecute;
     private Donner donner;
     private List<ButtonList> buttonLists;
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Image image = new Image("image/fleche_menu_déroulante.png");
+        buttonVolume.setImage(image);
+        buttonExecute.setImage(image);
+    }
 
     public void volume(ActionEvent actionEvent) {
         if (aBoolean1){
             volumePlus.setPrefHeight(0);
             volumeMoins.setPrefHeight(0);
+            buttonVolume.setRotate(180);
             aBoolean1 = false;
         }else {
             volumePlus.setPrefHeight(30);
             volumeMoins.setPrefHeight(30);
+            buttonVolume.setRotate(0);
             aBoolean1 = true;
         }
 
@@ -48,16 +64,14 @@ public class Modifier_Button {
         if (aBoolean2){
             lancerAPP.setPrefHeight(0);
             lancerSon.setPrefHeight(0);
+            buttonExecute.setRotate(180);
             aBoolean2 = false;
         }else {
             lancerAPP.setPrefHeight(30);
             lancerSon.setPrefHeight(30);
+            buttonExecute.setRotate(0);
             aBoolean2 = true;
         }
-    }
-
-    public void button110(ActionEvent actionEvent) {
-
     }
 
     public void donner(Donner donner, List<ButtonList> buttonLists){

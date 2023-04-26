@@ -37,7 +37,7 @@
                   <Button fx:id="volumeMoins" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="volume-" />
                   <Button fx:id="execute" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#execute" prefHeight="30.0" prefWidth="150.0" text="execute">
                      <graphic>
-                        <Label text="Label" />
+                        <ImageView fx:id="buttonExecute" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </Button>
                   <Button fx:id="lancerAPP" minHeight="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="lancer application" />
