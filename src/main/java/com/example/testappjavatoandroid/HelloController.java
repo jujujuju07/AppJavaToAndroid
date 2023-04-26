@@ -227,20 +227,6 @@ public class HelloController extends Application implements Initializable{
         System.exit(0);
     }
 
-    public void execute(String messageRecu){
-        if(!Objects.equals(messageRecu, "")){
-
-            try {
-                Runtime r = Runtime.getRuntime();
-                Process p = null;
-                p = r.exec(messageRecu);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-    }
-
     public void execute(int nombre){
         Volume volume;
         Execute executeLance;
@@ -300,7 +286,6 @@ public class HelloController extends Application implements Initializable{
     public void start(Stage stage) throws Exception {
         this.stage = stage;
         stage.setTitle("titre");
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("modifeButton.fxml"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("modifie_Button.fxml"));
 
         Parent root = loader.load();
@@ -316,7 +301,6 @@ public class HelloController extends Application implements Initializable{
 
 
         VBox vBoxM = (VBox) root.lookup("#vBoxM");
-        ArrayList<HBox> arrayLists = new ArrayList<>();
 
         volumePlus.setOnAction(event -> {
             List_Button listButton = new List_Button();
@@ -345,12 +329,6 @@ public class HelloController extends Application implements Initializable{
 
         Modifier_Button modifier_button = loader.getController();
         modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase),execute_.get(selectionemplacement));
-        //System.out.println(selectionlistlistcase + " " + selectionlistcase + " " + selectionemplacement);
-
-
-
-        //modifeButton = loader.getController();
-        //modifeButton.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionlistcase+(selectionlistlistcase*10)) ,this);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
