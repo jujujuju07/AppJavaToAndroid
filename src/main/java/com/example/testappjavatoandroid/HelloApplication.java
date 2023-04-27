@@ -31,7 +31,7 @@ public class HelloApplication extends Application {
     private DonnerApp donnerApp;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
         lire();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
 
@@ -42,6 +42,7 @@ public class HelloApplication extends Application {
         helloController.largeur.setText(donnerApp.getLargeur());
         VBox vBox = (VBox) root.lookup("#liste_button");
         boolean nouvauxlistCase = false;
+        int emplacement = 0;
         for (int i = 0; i <Integer.parseInt(donnerApp.getLargeur()); i++) {
             HBox hBox = new HBox();
             for (int j = 0; j <Integer.parseInt(donnerApp.getLongeur()); j++) {
@@ -49,18 +50,18 @@ public class HelloApplication extends Application {
                 ImageView imageView = new ImageView();
                 Label label = new Label();
                 String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
-                System.out.println(ip[1]);
 
                 imageView.setImage(new Image("http:/" + ip[1] + ":8080/image/carre-blanc.jpg"));
                 imageView.setFitHeight(150);
                 imageView.setFitWidth(150);
-                imageView.setId("ImageView "+ i + " " + j);
+                imageView.setId("ImageView "+ i + " " + j + " " + emplacement);
                 imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         String[] t = imageView.getId().split(" ");
                         helloController.selectionlistlistcase = Integer.parseInt(t[1]);
                         helloController.selectionlistcase = Integer.parseInt(t[2]);
+                        helloController.selectionemplacement = Integer.parseInt(t[3]);
                         helloController.modif();
                         System.out.println("salut");
                     }
@@ -77,6 +78,8 @@ public class HelloApplication extends Application {
                 stackPane.getChildren().add(imageView);
                 stackPane.getChildren().add(label);
                 hBox.getChildren().add(stackPane);
+
+                emplacement++;
 
             }
             nouvauxlistCase = true;
