@@ -8,7 +8,6 @@ import com.example.testappjavatoandroid.methode.Case;
 import com.example.testappjavatoandroid.methode.DonnerApp;
 import com.example.testappjavatoandroid.methode.model.Donner;
 import com.example.testappjavatoandroid.methode.model.ArrayListListDonner;
-import com.example.testappjavatoandroid.methode.modelExecute.ResponseExecute;
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -49,17 +47,15 @@ public class HelloController extends Application implements Initializable{
     public BufferedWriter bw ;
     public BufferedReader br ;
     public Path pathDonner = Paths.get("donner.txt");
-    public Path pathExecute_ = Paths.get("execute_.txt");
-
     public Path pathExecute = Paths.get("execute.txt");
+
     private Path pathValeur = Paths.get("valeur.txt");
     public int selectionlistcase;
     public int selectionlistlistcase;
     public int selectionemplacement;
     public ArrayList<ArrayList<Donner>> donnerListList = new ArrayList<>();
     public ArrayList<ArrayList<Case>> listlistcase = new ArrayList<>();
-    public List<com.example.testappjavatoandroid.methode.modelExecute.Donner> execute = new ArrayList<>();
-    public List<List<ButtonList>> execute_ = new ArrayList<>();
+    public List<List<ButtonList>> execute = new ArrayList<>();
     public DonnerApp donnerApp;
 
     public Label EtatServeur;
@@ -70,9 +66,10 @@ public class HelloController extends Application implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
 
-    public void lance() throws IOException, InterruptedException {
+    public void lance() throws IOException {
         serveurTCP.serveurMulticast();
         serveurTCP.lancer();
         selectionlistlistcase = -1;
@@ -110,28 +107,9 @@ public class HelloController extends Application implements Initializable{
                 br = Files.newBufferedReader(pathExecute);
                 String line = br.readLine();
                 if (!Objects.equals(line,"")){
-                    ResponseExecute responseExecute = gson.fromJson(line, ResponseExecute.class);
-                    execute = responseExecute.getDonner();
-                }else {
-                    creationExecute();
-                }
-                br.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            creationExecute();
-        }
-
-        if (Files.exists(pathExecute_)){
-            try {
-                Gson gson = new Gson();
-                br = Files.newBufferedReader(pathExecute_);
-                String line = br.readLine();
-                if (!Objects.equals(line,"")){
                     try {
                         ListButton listButton = gson.fromJson(line, ListButton.class);
-                        execute_ = listButton.getButtonButton();
+                        execute = listButton.getButtonButton();
                     }catch (Exception e){
                         creation_Execute();
                         System.out.println(e.getMessage());
@@ -157,18 +135,10 @@ public class HelloController extends Application implements Initializable{
         }
     }
 
-    private void creationExecute() {
-        for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
-            com.example.testappjavatoandroid.methode.modelExecute.Donner donner = new com.example.testappjavatoandroid.methode.modelExecute.Donner();
-            donner.setExecute("");
-            execute.add(donner);
-        }
-    }
-
     private void creation_Execute(){
         for (int i = 0; i < (Integer.parseInt(donnerApp.getLongeur()) * Integer.parseInt(donnerApp.getLargeur())); i++) {
             List<ButtonList> execute = new ArrayList<>();
-            execute_.add(execute);
+            this.execute.add(execute);
         }
     }
 
@@ -188,10 +158,8 @@ public class HelloController extends Application implements Initializable{
         Gson gson = new Gson();
         ArrayListListDonner donner = new ArrayListListDonner();
         donner.setArrayListDonner(donnerListList);
-        ResponseExecute responseExecute = new ResponseExecute();
-        responseExecute.setDonner(execute);
         ListButton listButton = new ListButton();
-        listButton.setButtonButton(execute_);
+        listButton.setButtonButton(execute);
         if (largeur.getText() != ""){
             donnerApp.setLargeur(largeur.getText());
         }
@@ -202,13 +170,10 @@ public class HelloController extends Application implements Initializable{
             bw = Files.newBufferedWriter(pathDonner);
             bw.write(gson.toJson(donner));
             bw.close();
-            bw = Files.newBufferedWriter(pathExecute);
-            bw.write(gson.toJson(responseExecute));
-            bw.close();
             bw = Files.newBufferedWriter(pathValeur);
             bw.write(gson.toJson(donnerApp));
             bw.close();
-            bw = Files.newBufferedWriter(pathExecute_);
+            bw = Files.newBufferedWriter(pathExecute);
             bw.write(gson.toJson(listButton));
             bw.close();
         } catch (IOException e) {
@@ -231,8 +196,8 @@ public class HelloController extends Application implements Initializable{
         Volume volume;
         Execute executeLance;
 
-        for (int i = 0; i < execute_.get(nombre).size(); i++) {
-            ButtonList buttonList = execute_.get(nombre).get(i);
+        for (int i = 0; i < execute.get(nombre).size(); i++) {
+            ButtonList buttonList = execute.get(nombre).get(i);
             switch (buttonList.getButtonType()){
                 case "volumePlus":
                     volume = new Volume();
@@ -328,7 +293,7 @@ public class HelloController extends Application implements Initializable{
         });
 
         Modifier_Button modifier_button = loader.getController();
-        modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase),execute_.get(selectionemplacement));
+        modifier_button.donner(donnerListList.get(selectionlistlistcase).get(selectionlistcase), execute.get(selectionemplacement));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
