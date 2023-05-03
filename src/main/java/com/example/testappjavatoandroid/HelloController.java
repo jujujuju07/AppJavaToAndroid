@@ -70,6 +70,7 @@ public class HelloController extends Application implements Initializable{
     }
 
     public void lance() throws IOException {
+        new Thread(() -> new Serveur_Image().start()).start();
         serveurTCP.serveurMulticast();
         serveurTCP.lancer();
         selectionlistlistcase = -1;
