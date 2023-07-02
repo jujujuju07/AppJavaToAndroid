@@ -10,6 +10,7 @@ import com.example.testappjavatoandroid.methode.model.Donner;
 import com.example.testappjavatoandroid.methode.model.ArrayListListDonner;
 import com.google.gson.Gson;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -305,4 +306,11 @@ public class HelloController extends Application implements Initializable{
     }
 
 
+    public void mise_a_jour_app(ActionEvent actionEvent) {
+        try {
+            serveurTCP.mise_a_jour_app();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -95,6 +95,25 @@ public class ServeurTCP {
         }
     }
 
+    public void mise_a_jour_app() throws IOException {
+        Response response = new Response();
+        ArrayList<Donner> donner = new ArrayList<>();
+        for (int i = 0; i < fxmlCont.donnerListList.size(); i++) {
+            for (int j = 0; j < fxmlCont.donnerListList.get(i).size(); j++) {
+                donner.add(fxmlCont.donnerListList.get(i).get(j));
+            }
+        }
+
+        Gson gson = new Gson();
+        response.setDonner(donner);
+        response.setLine(fxmlCont.donnerApp.getLargeur());
+        for (int i = 0; i < socketA.size(); i++) {
+            System.out.println(socketA.size() + " " + i);
+            envoier(gson.toJson(response), new PrintStream(socketA.get(i).getOutputStream()));
+        }
+
+    }
+
     public void envoier(String message,PrintStream fluxSortie){
         if (message.length() != 0 )
         {

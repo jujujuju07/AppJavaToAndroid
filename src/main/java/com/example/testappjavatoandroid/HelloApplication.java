@@ -58,21 +58,18 @@ public class HelloApplication extends Application {
                 imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        String[] t = imageView.getId().split(" ");
-                        helloController.selectionlistlistcase = Integer.parseInt(t[1]);
-                        helloController.selectionlistcase = Integer.parseInt(t[2]);
-                        helloController.selectionemplacement = Integer.parseInt(t[3]);
-                        helloController.modif();
-                        System.out.println("salut");
+                        ouverture_fenetre(imageView.getId(), helloController);
                     }
                 });
 
-
-
-                label.setId("LabelView"+i+j);
+                label.setId("LabelView "+ i + " " + j + " " + emplacement);
                 if (!nouvauxlistCase){
                     helloController.listlistcase.add(new ArrayList<Case>());
                 }
+                label.setOnMouseClicked(event -> {
+                    ouverture_fenetre(label.getId(), helloController);
+                });
+
                 helloController.listlistcase.get(i).add(new Case(imageView,label));
 
                 stackPane.getChildren().add(imageView);
@@ -95,6 +92,19 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> helloController.close());
         stage.show();
+    }
+
+    private void ouverture_fenetre(String id, HelloController helloController) {
+        String[] t = id.split(" ");
+        helloController.selectionlistlistcase = Integer.parseInt(t[1]);
+        helloController.selectionlistcase = Integer.parseInt(t[2]);
+        helloController.selectionemplacement = Integer.parseInt(t[3]);
+        helloController.modif();
+        try {
+            helloController.serveurTCP.mise_a_jour_app();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void lire(){

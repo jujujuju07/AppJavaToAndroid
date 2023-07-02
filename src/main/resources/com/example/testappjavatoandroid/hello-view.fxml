@@ -16,7 +16,7 @@
               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
           </padding>
       
-                            <Label fx:id="EtatServeur" text="T" />
+                            <Label fx:id="EtatServeur" />
          <Pane prefHeight="453.0" prefWidth="440.0">
             <children>
                <Button layoutX="383.0" layoutY="-12.0" mnemonicParsing="false" onAction="#fermeture" text="save" />
@@ -24,6 +24,7 @@
                <Label layoutX="184.0" layoutY="182.0" text="longeur" />
                <TextField fx:id="largeur" layoutX="131.0" layoutY="111.0" />
                <TextField fx:id="longeur" layoutX="131.0" layoutY="199.0" />
+               <Button layoutX="296.0" layoutY="390.0" mnemonicParsing="false" onAction="#mise_a_jour_app" text="mise à jour apple" />
             </children>
          </Pane>
       </VBox>
