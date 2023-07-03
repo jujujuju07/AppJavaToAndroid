@@ -1,13 +1,13 @@
 package com.example.testappjavatoandroid;
 
-import com.example.testappjavatoandroid.button.ButtonList;
-import com.example.testappjavatoandroid.button.ListButton;
-import com.example.testappjavatoandroid.execute.Execute;
-import com.example.testappjavatoandroid.execute.Volume;
-import com.example.testappjavatoandroid.methode.Case;
-import com.example.testappjavatoandroid.methode.DonnerApp;
-import com.example.testappjavatoandroid.methode.model.Donner;
-import com.example.testappjavatoandroid.methode.model.ArrayListListDonner;
+import com.example.testappjavatoandroid.model.button.ButtonList;
+import com.example.testappjavatoandroid.model.button.ListButton;
+import com.example.testappjavatoandroid.model.execute.Execute;
+import com.example.testappjavatoandroid.model.execute.Volume;
+import com.example.testappjavatoandroid.model.methode.Case;
+import com.example.testappjavatoandroid.model.methode.DonnerApp;
+import com.example.testappjavatoandroid.model.methode.model.Donner;
+import com.example.testappjavatoandroid.model.methode.model.ArrayListListDonner;
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

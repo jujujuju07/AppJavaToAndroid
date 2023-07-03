@@ -1,7 +1,7 @@
 package com.example.testappjavatoandroid;
 
-import com.example.testappjavatoandroid.button.ButtonList;
-import com.example.testappjavatoandroid.methode.model.Donner;
+import com.example.testappjavatoandroid.model.button.ButtonList;
+import com.example.testappjavatoandroid.model.methode.model.Donner;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

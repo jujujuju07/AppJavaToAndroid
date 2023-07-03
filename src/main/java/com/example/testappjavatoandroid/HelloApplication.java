@@ -1,7 +1,7 @@
 package com.example.testappjavatoandroid;
 
-import com.example.testappjavatoandroid.methode.Case;
-import com.example.testappjavatoandroid.methode.DonnerApp;
+import com.example.testappjavatoandroid.model.methode.Case;
+import com.example.testappjavatoandroid.model.methode.DonnerApp;
 import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.event.EventHandler;

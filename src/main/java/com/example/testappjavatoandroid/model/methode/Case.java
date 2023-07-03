@@ -1,4 +1,4 @@
-package com.example.testappjavatoandroid.methode;
+package com.example.testappjavatoandroid.model.methode;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

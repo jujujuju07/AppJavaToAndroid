@@ -6,12 +6,12 @@ module com.example.testappjavatoandroid {
 
 
     opens com.example.testappjavatoandroid to javafx.fxml;
-    opens com.example.testappjavatoandroid.methode.model to com.google.gson;
-    opens com.example.testappjavatoandroid.methode to com.google.gson;
-    opens com.example.testappjavatoandroid.button to com.google.gson, javafx.fxml;
+    opens com.example.testappjavatoandroid.model.methode.model to com.google.gson;
+    opens com.example.testappjavatoandroid.model.methode to com.google.gson;
+    opens com.example.testappjavatoandroid.model.button to com.google.gson, javafx.fxml;
     exports com.example.testappjavatoandroid;
-    exports com.example.testappjavatoandroid.methode;
-    exports com.example.testappjavatoandroid.methode.model;
-    exports com.example.testappjavatoandroid.button;
-    exports com.example.testappjavatoandroid.execute;
+    exports com.example.testappjavatoandroid.model.methode;
+    exports com.example.testappjavatoandroid.model.methode.model;
+    exports com.example.testappjavatoandroid.model.button;
+    exports com.example.testappjavatoandroid.model.execute;
 }

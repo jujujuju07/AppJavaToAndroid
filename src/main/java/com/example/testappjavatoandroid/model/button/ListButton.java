@@ -1,5 +1,5 @@
 
-package com.example.testappjavatoandroid.button;
+package com.example.testappjavatoandroid.model.button;
 
 import com.google.gson.annotations.SerializedName;
 

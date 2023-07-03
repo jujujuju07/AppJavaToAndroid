@@ -1,8 +1,8 @@
 
-package com.example.testappjavatoandroid.methode.model;
+package com.example.testappjavatoandroid.model.methode.model;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
