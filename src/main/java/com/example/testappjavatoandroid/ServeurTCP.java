@@ -1,7 +1,8 @@
 package com.example.testappjavatoandroid;
 
-import com.example.testappjavatoandroid.methode.model.Donner;
-import com.example.testappjavatoandroid.methode.model.Response;
+import com.example.testappjavatoandroid.model.methode.model.Donner;
+import com.example.testappjavatoandroid.model.methode.model.Response;
+import com.example.testappjavatoandroid.model.socketlist.Socketlist;
 import com.google.gson.Gson;
 import javafx.application.Platform;
 
@@ -11,6 +12,8 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ServeurTCP {
     final int port=1222;
@@ -19,7 +22,10 @@ public class ServeurTCP {
     Socket socketDuClient;
     HelloController fxmlCont;
     ServerSocket monServerDeSocket = null;
-    ArrayList<Socket> socketA = new ArrayList<Socket>();
+    MulticastSocket multicastSocket = null;
+    InetAddress multicastGroup = null;
+    Timer timer = null;
+    ArrayList<Socketlist> socketA = new ArrayList<Socketlist>();
 
 
     ServeurTCP(HelloController fxmlCont){
@@ -27,44 +33,41 @@ public class ServeurTCP {
     }
 
     public void lancer(){
-        new Thread(new Runnable() {
+        new Thread(() -> {
+            try {
+                monServerDeSocket = new ServerSocket(port);
+                updateMessage("Serveur en fonctionnement",true);
+                System.out.println("Serveur en fonctionnement.");
 
-            @Override
-            public void run() {
-                try {
-                    monServerDeSocket = new ServerSocket(port);
-                    updateMessage("Serveur en fonctionnement",true);
-                    System.out.println("Serveur en fonctionnement.");
-
-                    while (true) {
-                        socketDuClient = monServerDeSocket.accept();
-                        System.out.println("Connexion avec : "+socketDuClient.getInetAddress());
-                        socketA.add(socketDuClient);
-                        Thread thread = new Thread(){
-                            @Override
-                            public void run() {
-                                try {
-                                    reception(socketDuClient);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                        };
-                        thread.start();
-                    }
-
-                } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                    throw new RuntimeException(e);
+                while (true) {
+                    socketDuClient = monServerDeSocket.accept();
+                    System.out.println("Connexion avec : "+socketDuClient.getInetAddress());
+                    BufferedReader fluxEntree = new BufferedReader(new InputStreamReader(socketDuClient.getInputStream()));
+                    PrintStream fluxSortie = new PrintStream(socketDuClient.getOutputStream());
+                    Socketlist socketlist = new Socketlist();
+                    socketlist.setSocket(socketDuClient);
+                    socketlist.setFluxEntree(fluxEntree);
+                    socketlist.setFluxSortie(fluxSortie);
+                    socketA.add(socketlist);
+                    Thread thread = new Thread(() -> {
+                        try {
+                            reception(socketlist);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    thread.start();
                 }
 
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException(e);
             }
+
         }).start();
     }
 
-    public void reception(Socket socket) throws IOException {
-        BufferedReader fluxEntree = new BufferedReader(new InputStreamReader(socketDuClient.getInputStream()));
-        PrintStream fluxSortie = new PrintStream(socketDuClient.getOutputStream());
+    public void reception(Socketlist socketlist) throws IOException {
         try{
             Response response = new Response();
             ArrayList<Donner> donner = new ArrayList<>();
@@ -74,24 +77,25 @@ public class ServeurTCP {
                 }
             }
 
-            while (socket.isConnected()){
+            while (socketlist.getSocket().isConnected()){
                 System.out.println("attente...");
                 Gson gson = new Gson();
                 response.setDonner(donner);
                 response.setLine(fxmlCont.donnerApp.getLargeur());
-                fluxSortie.println(gson.toJson(response));
-                int NbLus = fluxEntree.read(bufferEntree);
+                socketlist.getFluxSortie().println(gson.toJson(response));
+                int NbLus = socketlist.getFluxEntree().read(bufferEntree);
                 if (NbLus != -1){
                     messageRecu = new String(bufferEntree, 0,NbLus);
                     fxmlCont.execute(Integer.parseInt(messageRecu));
                 }else {
-                    deconexion(socket,fluxEntree,fluxSortie);
+                    deconexion(socketlist);
+                    socketA.remove(socketlist);
                 }
 
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
-            deconexion(socket,fluxEntree,fluxSortie);
+            deconexion(socketlist);
         }
     }
 
@@ -109,7 +113,7 @@ public class ServeurTCP {
         response.setLine(fxmlCont.donnerApp.getLargeur());
         for (int i = 0; i < socketA.size(); i++) {
             System.out.println(socketA.size() + " " + i);
-            envoier(gson.toJson(response), new PrintStream(socketA.get(i).getOutputStream()));
+            envoier(gson.toJson(response), socketA.get(i).getFluxSortie());
         }
 
     }
@@ -125,15 +129,28 @@ public class ServeurTCP {
 
     }
 
-    public void deconexion(Socket socket,BufferedReader fluxEntree,PrintStream fluxSortie) throws IOException {
-        fluxSortie.close();
-        fluxEntree.close();
-        socket.close();
+    public void deconexion(Socketlist socketlist) throws IOException {
+        socketlist.getFluxSortie().close();
+        socketlist.getFluxEntree().close();
+        socketlist.getSocket().close();
     }
 
-    public void deconexionAll() throws IOException {
-        for (int i = 0; i < socketA.size(); i++) {
-            socketA.get(i).close();
+    public void deconexionAll() throws IOException, InterruptedException {
+        timer.cancel();
+        multicastSocket.leaveGroup(multicastGroup);
+        Thread.sleep(1000);
+        for (int i = 0; i < socketA.size();) {
+            System.out.println(i);
+            if (socketA.get(i).getSocket().isConnected()){
+                socketA.get(i).getFluxSortie().println("exit");
+                //Thread.sleep(1000);
+/*
+                if (socketA.get(i).getSocket().isConnected()){
+                    deconexion(socketA.get(i));
+                }
+*/
+            }
+            socketA.remove(socketA.get(i));
         }
     }
 
@@ -162,32 +179,32 @@ public class ServeurTCP {
 
     }
 
-    public void serveurMulticast() {
-        Thread thread = new Thread(){
+    public void serveurMulticast() throws IOException {
+        multicastSocket = new MulticastSocket();
+        multicastGroup = InetAddress.getByName("224.0.0.107");
+        multicastSocket.joinGroup(multicastGroup);
+
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                MulticastSocket multicastSocket = null;
                 try {
-                    multicastSocket = new MulticastSocket();
-
-                InetAddress multicastGroup = InetAddress.getByName("224.0.0.107");
-                multicastSocket.joinGroup(multicastGroup);
-
-                while (true) {
                     String message = InetAddress.getLocalHost().getHostAddress();
                     byte[] buffer = message.getBytes();
                     DatagramPacket packet = new DatagramPacket(buffer, buffer.length, multicastGroup, 4446);
 
                     multicastSocket.send(packet);
 
-                    Thread.sleep(1000);
-                }
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         };
-        thread.start();
+
+        timer.scheduleAtFixedRate(timerTask,0,1000);
+
+
+
 
 
     }

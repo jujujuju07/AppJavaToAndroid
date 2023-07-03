@@ -187,7 +187,7 @@ public class HelloController extends Application implements Initializable{
         fermeture();
         try {
             serveurTCP.deconexionAll();
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
         System.exit(0);
