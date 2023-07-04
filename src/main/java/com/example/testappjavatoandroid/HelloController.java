@@ -129,7 +129,11 @@ public class HelloController extends Application implements Initializable{
         for (int i = 0; i < listlistcase.size(); i++) {
             for (int j = 0; j < listlistcase.get(i).size(); j++) {
                 if (!Objects.equals(donnerListList.get(i).get(j).getImage(), "")){
-                    listlistcase.get(i).get(j).imageView.setImage(new Image("http://"+ ip[1] +donnerListList.get(i).get(j).getImage()));
+                    Image image = new Image("http://"+ ip[1] +donnerListList.get(i).get(j).getImage());
+                    if (image.isError()){
+                        image = new Image("image/carre-blanc.jpg");
+                    }
+                    listlistcase.get(i).get(j).imageView.setImage(image);
                 }
                 listlistcase.get(i).get(j).label.setText(donnerListList.get(i).get(j).getText());
             }
@@ -149,7 +153,7 @@ public class HelloController extends Application implements Initializable{
             for (int j = 0; j < Integer.parseInt(donnerApp.getLongeur()); j++) {
                 Donner donner = new Donner();
                 donner.setText("");
-                donner.setImage(":8080/image/carre-blanc.jpg");
+                donner.setImage("image/carre-blanc.jpg");
                 donnerListList.get(i).add(donner);
             }
         }
@@ -239,9 +243,13 @@ public class HelloController extends Application implements Initializable{
         String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
 
         if (!donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage().equals("")){
-            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("http://"+ ip[1] +donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage()));
+            Image image = new Image("http://"+ ip[1] +donnerListList.get(selectionlistlistcase).get(selectionlistcase).getImage());
+            if (image.isError()){
+                image = new Image("image/carre-blanc.jpg");
+            }
+            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(image);
         }else {
-            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("http://"+ ip[1] +":8080/image/carre-blanc.jpg"));
+            listlistcase.get(selectionlistlistcase).get(selectionlistcase).imageView.setImage(new Image("image/carre-blanc.jpg"));
         }
         listlistcase.get(selectionlistlistcase).get(selectionlistcase).label.setText(donnerListList.get(selectionlistlistcase).get(selectionlistcase).getText());
 

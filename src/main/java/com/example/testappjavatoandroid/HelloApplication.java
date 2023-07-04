@@ -51,9 +51,10 @@ public class HelloApplication extends Application {
                 Label label = new Label();
                 String[] ip = String.valueOf(InetAddress.getLocalHost()).split("/");
 
-                imageView.setImage(new Image("http:/" + ip[1] + ":8080/image/carre-blanc.jpg"));
+                imageView.setImage(new Image("image/carre-blanc.jpg"));
                 imageView.setFitHeight(150);
                 imageView.setFitWidth(150);
+
                 imageView.setId("ImageView "+ i + " " + j + " " + emplacement);
                 imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
